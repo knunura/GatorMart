@@ -1,0 +1,220 @@
+<!--
+    registration.html 
+    
+    Description: Allows a user to register a new account or navigate to the login page
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>GatorMart Register Page</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="../CSS/main.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/search.css">
+
+    <!--Font awesomesearch icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="body-color">
+    <div class="content">
+        <div class="border alert-warning d-flex justify-content-center" role="alert" style="font-weight: bold; padding-bottom: 5px; padding-top: 5px;">
+            SFSU Software Engineering Project CSC 648-848, Fall 2020. For Demonstration Only
+        </div>
+        <!-- [navbar] [theme] [backrgound theme]-->
+        <nav class="navbar navbar-expand-sm navbar-color">
+            <!-- Logo -->
+            <a class="navbar-brand" href="/">
+                <!--Below is for GatorMart actual logo when available-->
+                <img src="../Images/Logo/gatormart_logo.svg" height="40" class="d-inline-block align-top" alt="GatorMart" />
+            </a>
+
+            <!-- Hamburger icon -->
+            <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Collapse navbar on smaller screens-->
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <!-- Search bar code -->
+                <form class="mx-5 d-inline w-100" id="search-parts" method="GET" action="/HTML/marketplace.html">
+                    <div class="input-group">
+                        <select class="form-control search-slt col-sm-2" id="category" name="category">
+                        </select>
+                        <input class="form-control" type="text" placeholder="Search for items or class ID (e.g. CSC648)" id="searchtext" name="searchtext" pattern="[\w|\s]*" maxlength="40" title="Please enter up to 40 alphanumeric characters and spaces only">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit" id="nav-bar-go"
+                                style="background-color: #231161">
+                                <i class="fa fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Nav items code-->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/post" class="btn btn-outline-secondary" role="button">Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account" class="nav-link">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/aboutus" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <div id="loginLogout"><a href="/login" class="btn btn-outline-secondary" role="button">Login/Register</a></div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container rounded shadow-sm p-3 my-3 border col-lg-6 form-color">
+            <h2 class="text-center">Register Account Form</h2>
+            <form class="needs-validation" novalidate method="POST" action="/users/register">
+                <div class="form-group">
+                    <label for="UserFirstName">First Name:</label>
+                    <input type="text" class="form-control" id="UserFirstName" name="UserFirstName" placeholder="Enter your first name" required>
+                    <div class="invalid-feedback">
+                        Please enter first name.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="UserLastName">Last Name:</label>
+                    <input type="text" class="form-control" id="UserLastName" name="UserLastName" placeholder="Enter your last name" required>
+                    <div class="invalid-feedback">
+                        Please enter last name.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="UserEmail">Email address:</label>
+                    <input type="email" class="form-control" id="UserEmail" name="email" aria-describedby="emailHelp" placeholder="Enter your SFSU email" required oninput="validateEmail(this)">
+                    <div class="invalid-feedback">
+                        Must use a SFSU email.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="UserPassword1">Password:</label>
+                    <input type="password" class="form-control" id="UserPassword1" name="UserPassword1" placeholder="Enter your password" required>
+                    <div class="invalid-feedback">
+                        Please enter password.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="UserPassword2"> Confirm Password:</label>
+                    <input type="password" class="form-control" id="UserPassword2" name="UserPassword2" placeholder="Enter your password again" required oninput="validatePasswords(this)">
+                    <div class="invalid-feedback">
+                        Please enter password again.
+                    </div>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
+                    <label class="form-check-label" for="defaultCheck1">
+                      I agree to the <a href="/terms" target=" ">Terms & Conditions</a>
+                    </label>
+                </div>
+                <br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-secondary btn-block">Submit</button>
+                    <small id="emailHelp" class="form-text text-muted">
+                        <a href="/login">Already have an account? <u>Click Here</u></a>
+                    </small>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer-test">
+        <span>
+            © 2020-2021 Team 06 ・
+            <a href="/privacy" target=" ">Privacy Policy</a>
+            <a href="/terms" target=" ">・ Terms & Conditions</a>
+        </span>
+    </footer>
+
+    <!--Code for category pull down-->
+    <script>
+            function makeOp(data){
+                return ` <option value=${data.type}>${data.type}</option>`;
+            }
+            function cCreate(){
+                const cat = '/category/';
+                fetch(cat)
+                .then((data) => data.json())
+                .then((dataAsObject) => {
+                    let _html = "";
+                    dataAsObject.forEach((option) => {
+                        _html += makeOp(option);
+                    })
+                    document.getElementById('category').innerHTML = _html;
+                })
+                .catch((err) => console.log(err));
+            }
+            window.onload = cCreate();
+    </script>
+
+    <script>
+        function validatePasswords(password2){
+            var password1 = document.getElementById('UserPassword1');
+            if(password2.value != password1.value){
+                password2.setCustomValidity("Passwords do not match");
+            }else{
+                password2.setCustomValidity("");
+            }
+        }
+
+        function validateEmail(email){
+            if(email.value.endsWith("sfsu.edu")){
+                email.setCustomValidity("");
+            }else{
+                email.setCustomValidity("Must be a SFSU email");
+            }
+        }
+
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-81EP2TSP1R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-81EP2TSP1R');
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

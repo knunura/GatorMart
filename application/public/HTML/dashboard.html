@@ -1,0 +1,301 @@
+<!--
+    dashboard.html 
+    
+    Description: Gives a user access to their account information, their messages, and their posts
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Item Page</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="../CSS/main.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/search.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/dashboard.css">
+    <!--Font awesomesearch icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- JQuery for tabs -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body class="body-color">
+    <div class="content">
+        <div class="border alert-warning d-flex justify-content-center" role="alert"
+            style="font-weight: bold; padding-bottom: 5px; padding-top: 5px;">
+            SFSU Software Engineering Project CSC 648-848, Fall 2020. For Demonstration Only
+        </div>
+        <!-- [navbar] [theme] [backrgound theme]-->
+        <nav class="navbar navbar-expand-sm navbar-color">
+            <!-- Logo -->
+            <a class="navbar-brand" href="/">
+                <!--Below is for GatorMart actual logo when available-->
+                <img src="../Images/Logo/gatormart_logo.svg" height="40" class="d-inline-block align-top"
+                    alt="GatorMart" />
+            </a>
+
+            <!-- Hamburger icon -->
+            <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Collapse navbar on smaller screens-->
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <!-- Search bar code -->
+                <form class="mx-5 d-inline w-100" id="search-parts" method="GET" action="/HTML/marketplace.html">
+                    <div class="input-group">
+                        <select class="form-control search-slt col-sm-2" id="category" name="category">
+                        </select>
+                        <input class="form-control" type="text" placeholder="Search for items or class ID (e.g. CSC648)"
+                            id="searchtext" name="searchtext" pattern="[\w|\s]*" maxlength="40"
+                            title="Please enter up to 40 alphanumeric characters and spaces only">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit" id="nav-bar-go"
+                                style="background-color: #231161">
+                                <i class="fa fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Nav items code-->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/post" class="btn btn-outline-secondary" role="button">Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account" class="nav-link">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/aboutus" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <div id="loginLogout">
+                            <form action="/users/logout" method="POST"><input type="Submit"
+                                    class="btn btn-outline-secondary" role="button" value="Logout"></form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Start body of page with a container and small gap from navbar-->
+        <div class="container my-1">
+
+            <!-- Gotta take off border radius from CSS and use bootstrap "Border" instead on all pages for future -->
+            <div class="border shadow-sm rounded form-color">
+                <div class="row justify-content-center">
+                    <h3 class="my-2">User's Dashboard</h3>
+                </div>
+
+                <!-- Seller Image and Name -->
+                <div class="row mx-1">
+                    <button class="btn" type="button">
+                        <div class="sellerImage"></div>
+                    </button>
+                    <div class="my-2" id="userTopName">
+
+                        <!-- <p class="my-0">★★★★☆</p> -->
+                    </div>
+                </div>
+
+                <div class="mx-2 my-3 border rounded">
+                    <ul class="nav nav-tabs" id="myTabs">
+                        <li class="nav-item">
+                            <a href="#account" class="nav-link" data-toggle="tab">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#messages" class="nav-link" data-toggle="tab">Messages</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#my_posts" class="nav-link" data-toggle="tab">My Posts</a>
+                        </li>
+                    </ul>
+                    <div class="mx-2 tab-content">
+                        <!-- Account Information Tab -->
+                        <div class="tab-pane fade" id="account">
+                            <h4 class="mt-2">Account Information</h4>
+                            <h6 class="mt-4 font-weight-bold">Name</h6>
+                            <div id="fullName"></div>
+                            <h6 class="mt-4 font-weight-bold">E-mail</h6>
+                            <div id="userEmail"></div>
+                            <button type="button" class="my-2 btn btn-primary">Change Password</button>
+                        </div>
+
+                        <!-- Messages Tab -->
+                        <div class="tab-pane fade" id="messages">
+                            <h4 class="mt-2">My Messages</h4>
+                            <h6 class="mt-4" id="countMessages"></h6>
+                            <div id="messageTable"></div>
+                        </div>
+                        <div class="tab-pane fade" id="my_posts">
+                            <h4 class="mt-2">My Posts</h4>
+                            <h6 class="mt-4" id="countPosts"></h6>
+                            <div id="postTable"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-test">
+        <span class="float-right">
+            <a href="#">Back to top</a>
+        </span>
+        <span>
+            © 2020-2021 Team 06 ・
+            <a href="/privacy" target=" ">Privacy Policy</a>
+            <a href="/terms" target=" ">・ Terms & Conditions</a>
+        </span>
+    </footer>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-81EP2TSP1R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-81EP2TSP1R');
+    </script>
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!--Code for category pull down-->
+    <script>
+        function makeOp(data) {
+            return ` <option value=${data.type}>${data.type}</option>`;
+        }
+        function cCreate() {
+            const cat = '/category/';
+            fetch(cat)
+                .then((data) => data.json())
+                .then((dataAsObject) => {
+                    let _html = "";
+                    dataAsObject.forEach((option) => {
+                        _html += makeOp(option);
+                    })
+                    document.getElementById('category').innerHTML = _html;
+                })
+                .catch((err) => console.log(err));
+        }
+        function parseDateString(dateString) {
+            return dateString.split('T')[0];
+        }
+        function populateUserInfo(userID) {
+            const usrURL = '/users/getUserInfo';
+            fetch(usrURL)
+                .then((data) => data.json())
+                .then((dataAsObject) => {
+                    document.getElementById('userTopName').innerHTML = `<h6 class="my-0">${dataAsObject.firstname} ${dataAsObject.lastname}</h6>`;
+                    document.getElementById('fullName').innerHTML = `<p>${dataAsObject.firstname} ${dataAsObject.lastname}</p>`;
+                    document.getElementById('userEmail').innerHTML = `<p>${dataAsObject.email}</p>`;
+                })
+                .catch((err) => console.log(err));
+        }
+        function populateMessages(userID) {
+            const msgURL = '/messages/getMessagesForUser';
+            fetch(msgURL)
+                .then((data) => data.json())
+                .then((dataAsObject) => {
+                    document.getElementById('countMessages').innerHTML = `<small>Showing ${dataAsObject.length} of ${dataAsObject.length} Messages</small>`;
+                    let messageTable = `<table><tr>
+                    <td><h6 class="font-weight-bold">Post Title</h6></td>
+                    <td><h6 class="font-weight-bold">Date</h6></td>
+                    <td><h6 class="font-weight-bold">From</h6></td>
+                    <td><h6 class="font-weight-bold">Message</h6></td></tr>`;
+                    dataAsObject.forEach((message) => {
+                        messageTable += `<tr class="mr-5">
+                        <td><a href="/posts/${message.postID}" target="blank">${message.postTitle}</a></td>
+                        <td>${parseDateString(message.created)}</td>
+                        <td>${message.email}</td>
+                        <td>${message.message}</td></tr>`;
+                    });
+                    messageTable += '</table>';
+                    document.getElementById('messageTable').innerHTML = messageTable;
+                })
+                .catch((err) => console.log(err));
+        }
+        function deletePost(postID) {
+            var message;
+            var confirm_delete = confirm("Are you sure you want to delete this post?");
+            if (confirm_delete == true) {
+                message = "Post deleted!"
+                fetch('/posts/delete/' + postID, {
+                    method: 'DELETE'
+                })
+                    .then((data) => data.json())
+                    .then((dataAsObject) => {
+                        if (dataAsObject.success) {
+                            populatePosts();
+                        }
+                    });
+            } else {
+                message = "You pressed cancel!";
+            }
+            alert(message);
+        }
+        function populatePosts() {
+            const postURL = '/posts/getPostsByUser';
+            fetch(postURL)
+                .then((data) => data.json())
+                .then((dataAsObject) => {
+                    document.getElementById('countPosts').innerHTML = `<small>Showing ${dataAsObject.length} of ${dataAsObject.length} Posts</small>`;
+                    let postTable = `<table><tr>
+                    <td><h6 class="font-weight-bold">Post Title</h6></td>
+                    <td><h6 class="font-weight-bold">Date Created</h6></td>
+                    <td></td>
+                    <td></td>
+                    <td></td></tr>`;
+                    dataAsObject.forEach((post) => {
+                        postTable += `<tr class="mr-5">
+                        <td><a href="/posts/${post.id}" target="blank">${post.title}</a></td>
+                        <td>${parseDateString(post.created)}</td>
+                        <td><a href="/posts/${post.id}" target="blank"><button type="button" class="btn btn-primary btn-sm">View Post</button></a></td>
+                        <td><button type="button" class="btn btn-danger btn-sm" onclick="deletePost(${post.id});">Delete Post</button></td>
+                        <td>`;
+                        if (!post.approved) {
+                            postTable += '(Awaiting approval)';
+                        }
+                        postTable += '</td></tr>'
+                    });
+                    postTable += '</table>';
+                    document.getElementById('postTable').innerHTML = postTable;
+                })
+                .catch((err) => console.log(err));
+        }
+        window.onload = function () {
+            cCreate();
+            populateUserInfo();
+            populateMessages();
+            populatePosts();
+        };
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTabs a[href="#account"]').tab('show')
+        });
+    </script>
+</body>
+
+</html>

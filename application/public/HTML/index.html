@@ -1,0 +1,206 @@
+<!--
+    index.html 
+    
+    Description: The GatorMart front page. Shows a few recent items
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Home</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="../CSS/main.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/search.css">
+    <!--Font awesomesearch icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="body-color">
+    <div class="content">
+        <div class="border alert-warning d-flex justify-content-center" role="alert" style="font-weight: bold; padding-bottom: 5px; padding-top: 5px;">
+            SFSU Software Engineering Project CSC 648-848, Fall 2020. For Demonstration Only
+        </div>
+        <!-- [navbar] [theme] [backrgound theme]-->
+        <nav class="navbar navbar-expand-sm navbar-color">
+            <!-- Logo -->
+            <a class="navbar-brand" href="/">
+                <!--Below is for GatorMart actual logo when available-->
+                <img src="../Images/Logo/gatormart_logo.svg" height="40" class="d-inline-block align-top" alt="GatorMart" />
+            </a>
+
+            <!-- Hamburger icon -->
+            <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Collapse navbar on smaller screens-->
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <!-- Search bar code -->
+                <form class="mx-5 d-inline w-100" id="search-parts" method="GET" action="/HTML/marketplace.html">
+                    <div class="input-group">
+                        <select class="form-control search-slt col-sm-2" id="category" name="category">
+                        </select>
+                        <input class="form-control" type="text" placeholder="Search for items or class ID (e.g. CSC648)" id="searchtext" name="searchtext" pattern="[\w|\s]*" maxlength="40" title="Please enter up to 40 alphanumeric characters and spaces only">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit" id="nav-bar-go"
+                                style="background-color: #231161">
+                                <i class="fa fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Nav items code-->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/post" class="btn btn-outline-secondary" role="button">Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account" class="nav-link">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/aboutus" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <div id="loginLogout"></div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Start body of page with a container and small gap from navbar-->
+        <div class="container my-1">
+
+            <!-- Random Info -->
+            <div class="border shadow-sm row my-5 rounded" style="background:  #231161;">
+                <section class="text-center mt-3" style="color: white;">
+
+                    <h3 class="text-center font-weight-bold mb-4">Why shop with GatorMart?</h3>
+                    <!-- Section description -->
+                    <p class="text-center w-sm-75 mx-auto mb-4">Here at GatorMart, we strive to deliver the best customer experience to our users.
+                        We offer a wide array of services that allow San Francisco State students or staff and faculty to sell and exchange goods.
+                        These items are for SF State residents that would like to sell previously used materials.
+                        Only registered SF State residents are allowed to sign up and use this website which will increase the safety of users. 
+                    </p>
+                </section>
+            </div>
+
+            <div class="row my-3">
+                <h4 class="font-weight-bold">Recently Added Items : </h4>
+            </div>
+            <!-- Carousel -->
+            <div id="main-content-home" class="main-content">
+
+            </div>
+
+
+        </div>
+    
+    </div>
+
+    <footer class="footer-test">
+        <span>
+            © 2020-2021 Team 06 ・
+            <a href="/privacy" target=" ">Privacy Policy</a>
+            <a href="/terms" target=" ">・ Terms & Conditions</a>
+        </span>
+    </footer>
+    
+    <script type="text/javascript" src="../javascript/checklogin.js"></script>
+
+    <script>
+        function parseDateString(dateString) {
+            return dateString.split('T')[0];
+        }
+        function createCard(data2) {
+            let priceStr = 'Free';
+            if (data2.category === 'Item Request') {
+                priceStr = "Item Request";
+            }
+            else if (data2.price) {
+                priceStr = '$' + data2.price;
+            }
+            return `<a href="/posts/${data2.id}" id="post-${data2.id}" target="blank" class="test-card-wrapper"> \
+                <div class="test-card-body"> \
+                    <div class="test-card-top"> \
+                        <div class="test-card-image-wrapper"> \
+                            <img class="card-image" src="${data2.thumbnail}" /> \
+                        </div> \
+                    </div> \
+                    <div class="test-card-bottom"> \
+                        <span class="test-card-title">${data2.title}</span> \
+                        <div class="test-card-price-wrapper">
+                            <span class="test-card-price">${priceStr}</span> \
+                        </div> \
+                        <span class="test-card-date">${parseDateString(data2.created)}</span> \
+                    </div> \
+                </div> \
+            </a>`;
+        }
+
+        fetch('/posts/getRecentPosts/5')
+        .then((data2) => data2.json())
+        .then((dataAsObject2) => {
+            let _html2 = "";
+            dataAsObject2.forEach((post) => {
+                _html2 += createCard(post);
+            })
+            document.getElementById("main-content-home").innerHTML = _html2;
+        })
+        .catch((err) => console.log(err));
+    </script>
+
+    <!--Code for category pull down-->
+    <script>
+        function makeOp(data){
+            return ` <option value=${data.type}>${data.type}</option>`;
+        }
+        function cCreate(){
+            const cat = '/category/';
+            fetch(cat)
+            .then((data) => data.json())
+            .then((dataAsObject) => {
+                let _html = "";
+                dataAsObject.forEach((option) => {
+                    _html += makeOp(option);
+                })
+                document.getElementById('category').innerHTML = _html;
+            })
+            .catch((err) => console.log(err));
+        }
+
+        window.onload = function() {
+            cCreate();
+            checkLogin();
+        };
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-81EP2TSP1R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-81EP2TSP1R');
+    </script>
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

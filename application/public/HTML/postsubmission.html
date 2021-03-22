@@ -1,0 +1,245 @@
+<!--
+    postsubmission.html 
+    
+    Description: Allows a user to fill out the fields necessary to make a post
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Post Submission Page</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="../CSS/main.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/search.css">
+
+    <!--Font awesomesearch icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="body-color">
+    <div class="content">
+        <div class="border alert-warning d-flex justify-content-center" role="alert" style="font-weight: bold; padding-bottom: 5px; padding-top: 5px;">
+            SFSU Software Engineering Project CSC 648-848, Fall 2020. For Demonstration Only
+        </div>
+        <!-- [navbar] [theme] [backrgound theme]-->
+        <nav class="navbar navbar-expand-sm navbar-color">
+            <!-- Logo -->
+            <a class="navbar-brand" href="/">
+                <!--Below is for GatorMart actual logo when available-->
+                <img src="../Images/Logo/gatormart_logo.svg" height="40" class="d-inline-block align-top" alt="GatorMart" />
+            </a>
+
+            <!-- Hamburger icon -->
+            <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Collapse navbar on smaller screens-->
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <!-- Search bar code -->
+                <form class="mx-5 d-inline w-100" id="search-parts" method="GET" action="/HTML/marketplace.html">
+                    <div class="input-group">
+                        <select class="form-control search-slt col-sm-2" id="category" name="category">
+                        </select>
+                        <input class="form-control" type="text" placeholder="Search for items or class ID (e.g. CSC648)" id="searchtext" name="searchtext" pattern="[\w|\s]*" maxlength="40" title="Please enter up to 40 alphanumeric characters and spaces only">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit" id="nav-bar-go"
+                                style="background-color: #231161">
+                                <i class="fa fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Nav items code-->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/post" class="btn btn-outline-secondary" role="button">Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account" class="nav-link">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/aboutus" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <div id="loginLogout"><form action="/users/logout" method="POST"><input type="Submit" class="btn btn-outline-secondary" role="button" value="Logout"></form></div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    
+        <div class="container rounded shadow-sm p-3 my-3 border col-lg-7 form-color">
+            <form class="needs-validation font-weight-bold" novalidate method="POST" action="/posts/createPost" enctype="multipart/form-data">
+                <h2 class="text-center">Post Submission Form</h2>
+                <!--Item info-->
+                <!--Item Name/Post Title-->
+                <div class="form-group col">
+                    <label for="PostTitle">Title</label>
+                    <input type="text" class="form-control col-sm-10" id="PostTitle" name ="title" placeholder="e.g. Textbook for MATH400" required>
+                    <div class="invalid-feedback">
+                        Please enter a title.
+                    </div>
+                </div>
+                <!--Category -->
+                <div class="form-group col">
+                    <label for="ItemCat">Category</label>
+                    <select class="form-control col-sm-5" id="ItemCat" name="cat" onchange="checkCategory(this)" required>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a category.
+                    </div>
+                </div>
+                <!--Class ID (optional)-->
+                <div class="form-group col" id="ClassID">
+                    <label for="ClassID"> Class ID <span class="text-muted">(Optional)</span> </label>
+                    <input type="text" class="form-control col-sm-4" id="ItemClassID" name="classID" placeholder="e.g. CSC648">                        
+                </div>
+                <!--Price (optional)-->
+                <div class="form-group col-sm-4" id="Price">
+                    <label for="ItemPrice"> Price <span class="text-muted">(Optional)</span></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" step=".01" min="0" class="form-control" id="ItemPrice" name="price">
+                    </div>
+                </div>
+                <!--Description of Item-->
+                <div class="form-group col-sm-10">
+                    <label for="ItemDescription">Description</label>                            
+                    <textarea class="form-control" rows="5" id="ItemDescription" name= "description" placeholder="Enter item description..." required></textarea>
+                    <div class="invalid-feedback">
+                        Please enter a description.
+                    </div>
+                </div>
+                <!--Image uploaded here-->
+                <div class="custom-file col-sm-10 ml-3">
+                    <input type="file" class="custom-file-input" id="upload" name="upload" onchange="readURL(this);" required>
+                    <label class="custom-file-label" for="customFile" id="fileName">Choose image of item</label>
+                    <div class="invalid-feedback">
+                        Please upload an image of the item.
+                    </div>
+                </div>
+                <!--Image displayed here-->
+                <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block restrict"></div>
+                <div id="ImageUploadText"><p class="font-italic text-center">The image uploaded will be rendered here.</p></div>
+                <!--Submit and cancel buttons-->
+                <div class="ml-3">
+                    <!--Cancel button goes to home page-->
+                    <a href="/" class="btn btn-outline-secondary" role="button">Cancel</a>
+                    <button type="submit" class="btn btn-success btn-lg float-right">Submit for Approval</button>
+                    <small class="form-text text-muted float-right my-4"> (May take up to 24 hours to get approved)</small>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+
+    <footer class="footer-test">
+        <span>
+            © 2020-2021 Team 06 ・
+            <a href="/privacy" target=" ">Privacy Policy</a>
+            <a href="/terms" target=" ">・ Terms & Conditions</a>
+        </span>
+    </footer>
+
+
+    <!--Code for category pull down-->
+    <script>
+        function makeOp(data){
+            return `<option value="${data.type}">${data.type}</option>`;
+        }
+        function cCreate(){
+            const cat = '/category/';
+            fetch(cat)
+            .then((data) => data.json())
+            .then((dataAsObject) => {
+                let _html = "";
+                dataAsObject.forEach((option) => {
+                    _html += makeOp(option);
+                })
+                document.getElementById('category').innerHTML = _html;
+                var noAll = _html.indexOf("ion>") + 4;
+                document.getElementById('ItemCat').innerHTML = _html.substring(noAll, _html.length);
+            })
+            .catch((err) => console.log(err));
+        }
+        window.onload = cCreate();
+    </script>
+
+    <script>
+        function checkCategory(input){
+            var cat = input.value;
+            if(cat == "Item Request"){
+                document.getElementById("Price").style.display = "none";
+                document.getElementById("ClassID").style.display = "none";
+            }else if(cat == "Textbooks"|| cat == "Books"){
+                document.getElementById("Price").style.display = "flow-root";
+                document.getElementById("ClassID").style.display = "flow-root";
+            }else{
+                document.getElementById("Price").style.display = "flow-root";
+                document.getElementById("ClassID").style.display = "none";
+            }
+        }
+        //https://bootstrapious.com/p/bootstrap-image-upload
+        //displaying image
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#imageResult')
+                        .attr('src', e.target.result);
+                    document.getElementById('ImageUploadText').innerHTML = "";
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-81EP2TSP1R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-81EP2TSP1R');
+    </script>
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

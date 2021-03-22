@@ -1,0 +1,260 @@
+<!--
+    aboutus.html 
+    
+    Description: Link to the about pages for the individual members of the GatorMart team
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>About Us</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="../CSS/main.css">
+    <!--Font awesomesearch icons-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="body-color">
+    <div class="content">
+        <div class="border alert-warning d-flex justify-content-center" role="alert"
+            style="font-weight: bold; padding-bottom: 5px; padding-top: 5px;">
+            SFSU Software Engineering Project CSC 648-848, Fall 2020. For Demonstration Only
+        </div>
+        <!-- [navbar] [theme] [backrgound theme]-->
+        <nav class="navbar navbar-expand-sm navbar-color">
+            <!-- Logo -->
+            <a class="navbar-brand" href="/">
+                <!--Below is for GatorMart actual logo when available-->
+                <img src="../Images/Logo/gatormart_logo.svg" height="40" class="d-inline-block align-top"
+                    alt="GatorMart" />
+            </a>
+
+            <!-- Hamburger icon -->
+            <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Collapse navbar on smaller screens-->
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <!-- Search bar code -->
+                <form class="mx-5 d-inline w-100" id="search-parts" method="GET" action="/HTML/marketplace.html">
+                    <div class="input-group">
+                        <select class="form-control search-slt col-sm-2" id="category" name="category">
+                        </select>
+                        <input class="form-control" type="text" placeholder="Search for items or class ID (e.g. CSC648)"
+                            id="searchtext" name="searchtext" pattern="[\w|\s]*" maxlength="40"
+                            title="Please enter up to 40 alphanumeric characters and spaces only">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" type="submit" id="nav-bar-go"
+                                style="background-color: #231161">
+                                <i class="fa fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Nav items code-->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/post" class="btn btn-outline-secondary" role="button">Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/account" class="nav-link">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/aboutus" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <div id="loginLogout"></div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="carouselMenu" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselMenu" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselMenu" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox" style=" width:100%; height: 500px !important;">
+                <div class="carousel-item active">
+                    <img class="d-block img-fluid" src="../Images/AboutUs/carousel1.jpg" alt="First Slide">
+                    <div class="carousel-caption">
+                        <h3>About Team</h3>
+                        <p>The team behind this website is composed of San Francisco State University Juniors and
+                            Seniors in the Computer Science Department. This project was constructed 100% virtually
+                            due to the COVID-19 pandemic. Our team heavily relied on communication and resources such
+                            as GitHub and Zoom video-conferencing. </p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block img-fluid" src="../Images/AboutUs/carousel2.jpg" alt="Second Slide">
+                    <div class="carousel-caption">
+                        <h3>About Website</h3>
+                        <p>This project website is designed to be an online marketplace for San Francisco State
+                            University
+                            students, staff, and alumni only. The purpose behnd this project is to provide an easy and
+                            efficient way for members to sell and purchase items in a safe and secure manner
+                            with as little physical contact as possible.
+                        </p>
+                    </div>
+                </div>
+
+                <a class="carousel-control-prev" href="#carouselMenu" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselMenu" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="container my-0">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="text-center text-uppercase">The Team</h1>
+                </div>
+            </div>
+
+            <div class="row my-5">
+                <div class="itemImage col-sm-4">
+                    <div class="card my-2 shadow-sm" style="width:300px">
+                        <img class="card-img-top" src="../Images/AboutUs/Lothar.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Lothar Narins</h5>
+                            <h6 class="card-title">Team Lead</h6>
+                            <a href="../HTML/aboutlothar.html" class="btn btn-light border">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itemImage col-sm-4">
+                    <div class="card my-2 shadow-sm" style="width:300px">
+                        <img class="card-img-top" src="../Images/AboutUs/Aaron.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Aaron Colmenares</h5>
+                            <h6 class="card-title">Backend Lead</h6>
+                            <a href="../HTML/about_aaron.html" class="btn btn-light border">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itemImage col-sm-4">
+                    <div class="card my-2 shadow-sm" style="width:300px">
+                        <img class="card-img-top" src="../Images/AboutUs/Allyson.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Allyson Leung</h5>
+                            <h6 class="card-title">Frontend Lead</h6>
+                            <a href="../HTML/aboutallyson.html" class="btn btn-light border">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="itemImage col-sm-4">
+                    <div class="card my-2 shadow-sm" style="width:300px">
+                        <img class="card-img-top" src="../Images/AboutUs/Wilson.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Wilson Young</h5>
+                            <h6 class="card-title">GitHub Master</h6>
+                            <a href="../HTML/aboutwilson.html" class="btn btn-light border">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itemImage col-sm-4">
+                    <div class="card my-2 shadow-sm" style="width:300px">
+                        <img class="card-img-top" src="../Images/AboutUs/Saloni.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Saloni Bhatia</h5>
+                            <h6 class="card-title">Backend</h6>
+                            <a href="../HTML/aboutsaloni.html" class="btn btn-light border">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itemImage col-sm-4">
+                    <div class="card my-2 shadow-sm" style="width:300px">
+                        <img class="card-img-top" src="../Images/AboutUs/Kevin.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Kevin Nunura</h5>
+                            <h6 class="card-title">Frontend</h6>
+                            <a href="../HTML/aboutkevin.html" class="btn btn-light border">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer-test">
+        <span class="float-right">
+            <a href="#">Back to top</a>
+        </span>
+        <span>
+            © 2020-2021 Team 06 ・
+            <a href="/privacy" target=" ">Privacy Policy</a>
+            <a href="/terms" target=" ">・ Terms & Conditions</a>
+        </span>
+    </footer>
+
+    <script type="text/javascript" src="../javascript/checklogin.js"></script>
+
+    <!--Code for category pull down-->
+    <script>
+        function makeOp(data) {
+            return ` <option value=${data.type}>${data.type}</option>`;
+        }
+        function cCreate() {
+            const cat = '/category/';
+            fetch(cat)
+                .then((data) => data.json())
+                .then((dataAsObject) => {
+                    let _html = "";
+                    dataAsObject.forEach((option) => {
+                        _html += makeOp(option);
+                    })
+                    document.getElementById('category').innerHTML = _html;
+                })
+                .catch((err) => console.log(err));
+        }
+
+        window.onload = function () {
+            cCreate();
+            checkLogin();
+        };
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-81EP2TSP1R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-81EP2TSP1R');
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
